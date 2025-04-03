@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find a Therapist - SoulSpace</title>
+    <style>
+        /* Modern CSS Variables */
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #8577e9;
+            --primary-dark: #5649c0;
+            --secondary: #a569bd;
+            --accent: #00cec9;
+            --text: #2d3436;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gray: #dfe6e9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(165, 105, 189, 0.05) 0%, transparent 20%);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn {
+            background: var(--light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 1000;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 0.8rem 2rem;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-menu li:hover {
+            background: rgba(108, 92, 231, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .therapist-container {
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .therapist-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .therapist-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .therapist-header p {
+            font-size: 1.1rem;
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Therapist Form */
+        .therapist-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text);
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gray);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-right: 0.8rem;
+        }
+
+        /* Buttons */
+        .form-actions {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: linear-gradient(to right, var(--primary-dark), var(--primary));
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(108, 92, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--white);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Footer Note */
+        .form-footer {
+            text-align: center;
+            margin-top: 2rem;
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .therapist-container {
+                padding: 2rem 1rem;
+            }
+            
+            .therapist-header h1 {
+                font-size: 2rem;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="menu-icon" id="menuToggle">☰ MindCare</div>
+        <a href="page1.html" class="back-btn">← Back to Home</a>
+    </header>
+   <!-- Sidebar Navigation -->
+   <div class="sidebar" id="sidebar">
+    <ul class="sidebar-menu">
+        <li><a href="page1.html">Home</a></li>
+        <li><a href="book-session.html">Book a Session</a></li>
+        <li><a href="resources.html">Explore Resources</a></li>
+        <li><a href="mindfulness.html">Mindfulness Practices</a></li>
+        <li><a href="wellness-articles.html">Wellness Articles</a></li>
+        <li><a href="find_therapist_form.html">Find a Therapist</a></li>
+        <li><a href="self_help_tools.html">Self-Help Resources</a></li>
+        <li><a href="mental_health_articles.html">Mental Health Articles</a></li>
+    </ul>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <main class="therapist-container">
+        <div class="therapist-header">
+            <h1>Find a Therapist</h1>
+            <p>Connect with a mental health professional who matches your needs and preferences.</p>
+        </div>
+
+        <form class="therapist-form">
+            <div class="form-group">
+                <label for="location">Your Location</label>
+                <input type="text" id="location" placeholder="City or Zip Code">
+            </div>
+
+            <div class="form-group">
+                <label for="specialty">Therapy Specialty</label>
+                <select id="specialty">
+                    <option value="">Select a specialty</option>
+                    <option value="anxiety">Anxiety</option>
+                    <option value="depression">Depression</option>
+                    <option value="trauma">Trauma</option>
+                    <option value="relationships">Relationships</option>
+                    <option value="stress">Stress Management</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="therapy-type">Preferred Therapy Type</label>
+                <select id="therapy-type">
+                    <option value="">Select therapy type</option>
+                    <option value="cbt">Cognitive Behavioral (CBT)</option>
+                    <option value="psychodynamic">Psychodynamic</option>
+                    <option value="humanistic">Humanistic</option>
+                    <option value="family">Family Systems</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Availability</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="weekdays">
+                    <label for="weekdays">Weekdays</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="evenings">
+                    <label for="evenings">Evenings</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="weekends">
+                    <label for="weekends">Weekends</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="insurance">Insurance Provider</label>
+                <select id="insurance">
+                    <option value="">Select insurance</option>
+                    <option value="aetna">Aetna</option>
+                    <option value="bluecross">Blue Cross Blue Shield</option>
+                    <option value="cigna">Cigna</option>
+                    <option value="united">UnitedHealthcare</option>
+                    <option value="none">No Insurance</option>
+                </select>
+            </div>
+
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='page1.html'">← Back</button>
+                <button type="submit" class="btn btn-primary">Find Therapists</button>
+            </div>
+        </form>
+
+        <div class="form-footer">
+            <p>Powered by our partner network of licensed mental health professionals</p>
+        </div>
+    </main>
+
+    <script>
+        // Sidebar toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Form submission handling
+        document.querySelector('.therapist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // Here you would typically handle form submission
+            alert('Searching for therapists that match your criteria...');
+            // In a real app, this would redirect to therapist listings
+            // window.location.href = 'therapist-results.html';
+        });
+
+        // Authentication check
+        document.addEventListener("DOMContentLoaded", function() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Please login to access this feature");
+                window.location.href = "login_form.html";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mental Wellness Resources | SoulSpace</title>
+    <style>
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #8577e9;
+            --primary-dark: #5649c0;
+            --secondary: #a569bd;
+            --accent: #00cec9;
+            --text: #2d3436;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gray: #dfe6e9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        .back-btn {
+            background: var(--light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .resources-container {
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .resources-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .resources-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .resource-section {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .resource-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray);
+        }
+
+        .resource-list {
+            list-style: none;
+        }
+
+        .resource-item {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .resource-item:last-child {
+            border-bottom: none;
+        }
+
+        .resource-item a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .resource-item a:hover {
+            text-decoration: underline;
+        }
+
+        .back-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .resources-container {
+                padding: 2rem 1rem;
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 1000;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 0.8rem 2rem;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-menu li:hover {
+            background: rgba(108, 92, 231, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+     <header class="navbar">
+        <div class="menu-icon" id="menuToggle">☰ SoulSpace</div>
+        <a href="home.html" class="back-btn" aria-label="Back to Home">← Back to Home</a>
+    </header>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="book-session.html">Book a Session</a></li>
+            <li><a href="resources.html">Explore Resources</a></li>
+            <li><a href="mindfulness.html">Mindfulness Practices</a></li>
+            <li><a href="wellness-articles.html">Wellness Articles</a></li>
+            <li><a href="find_therapist_form.html">Find a Therapist</a></li>
+            <li><a href="self_help_tools.html">Self-Help Resources</a></li>
+            <li><a href="mental_health_articles.html">Mental Health Articles</a></li>
+        </ul>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="resources-container">
+        <div class="resources-header">
+            <h1>Mental Wellness Resources</h1>
+            <p>Discover a variety of resources to support your mental wellness journey</p>
+        </div>
+
+        <!-- Meditation Guides Section -->
+        <div class="resource-section">
+            <h2>Meditation Guides</h2>
+            <p>Guided meditations for relaxation and mindfulness</p>
+            <ul class="resource-list">
+                <li class="resource-item">
+                    <a href="https://www.headspace.com/" target="_blank" aria-label="Headspace - Guided Meditation">Headspace - Guided Meditation</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.calm.com/" target="_blank" aria-label="Calm - Meditation and Sleep Stories">Calm - Meditation and Sleep Stories</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.mindful.org/meditation/mindfulness-getting-started/" target="_blank" aria-label="Mindful - Getting Started with Meditation">Mindful - Getting Started with Meditation</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Self-Care Tips Section -->
+        <div class="resource-section">
+            <h2>Self-Care Tips</h2>
+            <p>Practical tips for self-care and stress management</p>
+            <ul class="resource-list">
+                <li class="resource-item">
+                    <a href="https://www.psychologytoday.com/us/blog/click-here-happiness/201812/self-care-12-ways-take-better-care-yourself" target="_blank" aria-label="12 Self-Care Tips from Psychology Today">12 Self-Care Tips from Psychology Today</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.helpguide.org/articles/stress/quick-stress-relief.htm" target="_blank" aria-label="Quick Stress Relief from HelpGuide">Quick Stress Relief from HelpGuide</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.nami.org/Your-Journey/Individuals-with-Mental-Illness/Taking-Care-of-Your-Body" target="_blank" aria-label="NAMI Self-Care Resources">NAMI Self-Care Resources</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Support Groups Section -->
+        <div class="resource-section">
+            <h2>Support Groups</h2>
+            <p>Find support groups in your area</p>
+            <ul class="resource-list">
+                <li class="resource-item">
+                    <a href="https://www.nami.org/Support-Education/Support-Groups" target="_blank" aria-label="NAMI Support Groups">NAMI Support Groups</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.mentalhealthamerica.net/find-support-groups" target="_blank" aria-label="Mental Health America Support Groups">Mental Health America Support Groups</a>
+                </li>
+                <li class="resource-item">
+                    <a href="https://www.psychologytoday.com/us/groups" target="_blank" aria-label="Psychology Today Group Finder">Psychology Today Group Finder</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="back-container">
+            <a href="page1.html" class="back-btn" aria-label="Back to Home">← Back to Home</a>
+        </div>
+    </main>
+
+    <script>
+        // Sidebar toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close sidebar when clicking on menu items
+        const menuItems = document.querySelectorAll('.sidebar-menu a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>

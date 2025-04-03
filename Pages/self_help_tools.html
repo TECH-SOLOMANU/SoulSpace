@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Help Resources - SoulSpace</title>
+    <style>
+        /* Modern CSS Variables */
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #8577e9;
+            --primary-dark: #5649c0;
+            --secondary: #a569bd;
+            --accent: #00cec9;
+            --text: #2d3436;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gray: #dfe6e9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(165, 105, 189, 0.05) 0%, transparent 20%);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn {
+            background: var(--light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 1000;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 0.8rem 2rem;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-menu li:hover {
+            background: rgba(108, 92, 231, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--primary);
+        }
+
+        /* Main Content */
+        .resources-container {
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .resources-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .resources-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .resources-header p {
+            font-size: 1.1rem;
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Resources Cards */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .resource-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border-left: 4px solid var(--primary);
+        }
+
+        .resource-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(108, 92, 234, 0.2);
+        }
+
+        .resource-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+        }
+
+        .resource-card p {
+            color: var(--text);
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .resource-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .resource-source {
+            font-size: 0.85rem;
+            color: var(--text);
+            opacity: 0.7;
+            font-style: italic;
+        }
+
+        .resource-link {
+            display: inline-block;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition);
+            border-bottom: 2px solid transparent;
+        }
+
+        .resource-link:hover {
+            color: var(--primary-dark);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* Back Button */
+        .back-container {
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .resources-container {
+                padding: 2rem 1rem;
+            }
+            
+            .resources-header h1 {
+                font-size: 2rem;
+            }
+            
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .resource-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="menu-icon" id="menuToggle">☰ MindCare</div>
+        <a href="page1.html" class="back-btn">← Back to Home</a>
+    </header>
+   <!-- Sidebar Navigation -->
+   <div class="sidebar" id="sidebar">
+    <ul class="sidebar-menu">
+        <li><a href="page1.html">Home</a></li>
+        <li><a href="book-session.html">Book a Session</a></li>
+        <li><a href="resources.html">Explore Resources</a></li>
+        <li><a href="mindfulness.html">Mindfulness Practices</a></li>
+        <li><a href="wellness-articles.html">Wellness Articles</a></li>
+        <li><a href="find_therapist_form.html">Find a Therapist</a></li>
+        <li><a href="self_help_tools.html">Self-Help Resources</a></li>
+        <li><a href="mental_health_articles.html">Mental Health Articles</a></li>
+    </ul>
+</div>
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+
+    <main class="resources-container">
+        <div class="resources-header">
+            <h1>Self-Help Resources</h1>
+            <p>Evidence-based tools and techniques for improving mental health</p>
+        </div>
+
+        <div class="resources-grid">
+            <!-- Meditation Apps -->
+            <div class="resource-card">
+                <h3>Meditation & Mindfulness Apps</h3>
+                <p>Research-backed apps that can help reduce stress and improve mental wellbeing through guided practices.</p>
+                <div class="resource-meta">
+                    <span class="resource-source">Sources: APA, NIH</span>
+                    <a href="https://www.apa.org/topics/mindfulness/meditation" target="_blank" rel="noopener noreferrer" class="resource-link">Explore →</a>
+                </div>
+            </div>
+
+            <!-- Journaling -->
+            <div class="resource-card">
+                <h3>Therapeutic Journaling</h3>
+                <p>Evidence shows expressive writing can help manage anxiety, reduce stress, and cope with depression.</p>
+                <div class="resource-meta">
+                    <span class="resource-source">Source: University of Rochester</span>
+                    <a href="https://www.urmc.rochester.edu/encyclopedia/content.aspx?ContentID=4552&ContentTypeID=1" target="_blank" rel="noopener noreferrer" class="resource-link">Learn More →</a>
+                </div>
+            </div>
+
+            <!-- Support Groups -->
+            <div class="resource-card">
+                <h3>Mental Health Support Groups</h3>
+                <p>NAMI and other organizations offer free support groups that can provide connection and coping strategies.</p>
+                <div class="resource-meta">
+                    <span class="resource-source">Source: NAMI</span>
+                    <a href="https://www.nami.org/Support-Education/Support-Groups" target="_blank" rel="noopener noreferrer" class="resource-link">Find Groups →</a>
+                </div>
+            </div>
+
+            <!-- Online Therapy -->
+            <div class="resource-card">
+                <h3>Evidence-Based Online Therapy</h3>
+                <p>Research shows online CBT can be as effective as in-person therapy for many mental health conditions.</p>
+                <div class="resource-meta">
+                    <span class="resource-source">Source: Journal of Medical Internet Research</span>
+                    <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6390980/" target="_blank" rel="noopener noreferrer" class="resource-link">Read Research →</a>
+                </div>
+            </div>
+
+            <!-- Breathing Exercises -->
+            <div class="resource-card">
+                <h3>Breathing Exercises</h3>
+                <p>Harvard Medical School recommends these science-backed breathing techniques for stress reduction.</p>
+                <div class="resource-meta">
+                    <span class="resource-source">Source: Harvard Health</span>
+                    <a href="https://www.health.harvard.edu/mind-and-mood/relaxation-techniques-breath-control-helps-quell-errant-stress-response" target="_blank" rel="noopener noreferrer" class="resource-link">Try Techniques →</a>
+                </div>
+            </div>
+
+            <!-- Sleep Resources -->
+            <div class="resource-card">
+                <h3>Sleep Improvement Tools</h3>
+                <p>CBT-I is the gold standard for insomnia treatment. These resources can help improve sleep quality.</p>
+                <div class="resource-meta">
+                    <span class="resource-source">Source: Sleep Foundation</span>
+                    <a href="https://www.sleepfoundation.org/sleep-hygiene" target="_blank" rel="noopener noreferrer" class="resource-link">Get Resources →</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-container">
+            <a href="page1.html" class="back-btn">← Back to Home</a>
+        </div>
+    </main>
+
+    <script>
+        // Sidebar toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close sidebar when clicking on menu items
+        const menuItems = document.querySelectorAll('.sidebar-menu a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Authentication check
+        document.addEventListener("DOMContentLoaded", function() {
+            const token = localStorage.getItem("token");
+            if (!token) {
+                alert("Please login to access these resources");
+                window.location.href = "login_form.html";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest Articles on Mental Wellness | SoulSpace</title>
+    <style>
+        /* Modern CSS Variables */
+        :root {
+            --primary: #6c5ce7;
+            --primary-light: #8577e9;
+            --primary-dark: #5649c0;
+            --secondary: #a569bd;
+            --accent: #00cec9;
+            --text: #2d3436;
+            --light: #f8f9fa;
+            --white: #ffffff;
+            --gray: #dfe6e9;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(165, 105, 189, 0.05) 0%, transparent 20%);
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: var(--white);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .menu-icon {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn {
+            background: var(--light);
+            color: var(--primary);
+            border: 2px solid var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .articles-container {
+            padding: 3rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            width: 100%;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .articles-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .articles-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .featured-article {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            border-top: 4px solid var(--primary);
+        }
+
+        .featured-article h2 {
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .featured-article p {
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .read-more {
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .read-more:hover {
+            color: var(--primary-dark);
+            text-decoration: underline;
+        }
+
+        .read-more::after {
+            content: "→";
+            transition: var(--transition);
+        }
+
+        .read-more:hover::after {
+            transform: translateX(3px);
+        }
+
+        .article-divider {
+            border: none;
+            height: 1px;
+            background: var(--gray);
+            margin: 2rem 0;
+        }
+
+        .article-section {
+            margin-bottom: 3rem;
+        }
+
+        .article-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--gray);
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .article-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(108, 92, 231, 0.15);
+        }
+
+        .article-card h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .article-card p {
+            color: var(--text);
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .back-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .articles-container {
+                padding: 2rem 1rem;
+            }
+            
+            .articles-header h1 {
+                font-size: 2rem;
+            }
+            
+            .featured-article {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px;
+            width: 280px;
+            height: 100vh;
+            background: var(--white);
+            box-shadow: 2px 0 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            z-index: 1000;
+            padding-top: 80px;
+            overflow-y: auto;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 999;
+        }
+
+        .sidebar-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            padding: 0.8rem 2rem;
+            transition: var(--transition);
+            border-left: 4px solid transparent;
+        }
+
+        .sidebar-menu li:hover {
+            background: rgba(108, 92, 231, 0.1);
+            border-left: 4px solid var(--primary);
+        }
+
+        .sidebar-menu a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 1.1rem;
+            display: block;
+            font-weight: 500;
+        }
+
+        .sidebar-menu a:hover {
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="menu-icon" id="menuToggle">☰ MindCare</div>
+        <a href="home.html" class="back-btn">← Back to Home</a>
+    </header>
+
+    <!-- Sidebar Navigation -->
+    <div class="sidebar" id="sidebar">
+        <ul class="sidebar-menu">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="book-session.html">Book a Session</a></li>
+            <li><a href="resources.html">Explore Resources</a></li>
+            <li><a href="mindfulness.html">Mindfulness Practices</a></li>
+            <li><a href="wellness-articles.html">Wellness Articles</a></li>
+            <li><a href="find_therapist_form.html">Find a Therapist</a></li>
+            <li><a href="self_help_tools.html">Self-Help Resources</a></li>
+            <li><a href="mental_health_articles.html">Mental Health Articles</a></li>
+        </ul>
+    </div>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <main class="articles-container">
+        <div class="articles-header">
+            <h1>Latest Articles on Mental Wellness</h1>
+            <p>Evidence-based insights for your mental health journey</p>
+        </div>
+
+        <!-- Featured Article -->
+        <div class="featured-article">
+            <h2>The Power of Mindfulness</h2>
+            <p>Understanding how mindfulness can improve your mental health. Recent studies show that regular mindfulness practice can reduce stress, improve focus, and enhance emotional regulation.</p>
+            <a href="https://edition.cnn.com/2024/04/15/health/exercise-stress-heart-disease-study-wellness/index.html" class="read-more">Read full article</a>
+        </div>
+
+        <hr class="article-divider">
+
+        <!-- Self-Care Section -->
+        <div class="article-section">
+            <h2>Self-Care Strategies</h2>
+            <p>Effective self-care strategies for a balanced life.</p>
+            
+            <div class="article-card">
+                <h3>The Art of Saying No</h3>
+                <p>Learn how setting healthy boundaries can significantly reduce stress and improve your mental wellbeing.</p>
+                <a href="https://www.psychologytoday.com/us/blog/click-here-happiness/201812/self-care-12-ways-take-better-care-yourself" class="read-more">Read more</a>
+            </div>
+            
+            <div class="article-card">
+                <h3>Digital Detox Techniques</h3>
+                <p>Discover how unplugging from technology can help restore mental clarity and reduce anxiety.</p>
+                <a href="https://www.verywellmind.com/how-to-do-a-digital-detox-5095868" class="read-more">Read more</a>
+            </div>
+            
+            <div class="article-card">
+                <h3>Sleep Hygiene Essentials</h3>
+                <p>Practical tips for improving your sleep quality and establishing a restful nighttime routine.</p>
+                <a href="https://www.sleepfoundation.org/sleep-hygiene" class="read-more">Read more</a>
+            </div>
+        </div>
+
+        <div class="back-container">
+            <a href="home.html" class="back-btn">← Back to Home</a>
+        </div>
+    </main>
+
+    <script>
+        // Sidebar toggle functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+        menuToggle.addEventListener('click', function() {
+            sidebar.classList.add('active');
+            sidebarOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        sidebarOverlay.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Close sidebar when clicking on menu items
+        const menuItems = document.querySelectorAll('.sidebar-menu a');
+        menuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                sidebar.classList.remove('active');
+                sidebarOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</body>
+</html>

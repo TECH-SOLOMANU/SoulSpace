@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to SoulSpace</title>
+    <style>
+        /* Modern CSS Reset with Variables */
+        :root {
+          --primary: #6c5ce7;
+          --primary-dark: #5649c0;
+          --secondary: #a569bd;
+          --text: #2d3436;
+          --light: #f8f9fa;
+          --white: #ffffff;
+          --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+          --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+          margin: 0;
+          padding: 0;
+          box-sizing: border-box;
+        }
+
+        body {
+          font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+          background: var(--light);
+          color: var(--text);
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          line-height: 1.6;
+          background-image: 
+            radial-gradient(circle at 10% 20%, rgba(108, 92, 231, 0.05) 0%, transparent 20%),
+            radial-gradient(circle at 90% 80%, rgba(165, 105, 189, 0.05) 0%, transparent 20%);
+        }
+
+        .auth-container {
+          background: var(--white);
+          padding: 3rem;
+          border-radius: 16px;
+          box-shadow: var(--shadow);
+          text-align: center;
+          max-width: 450px;
+          width: 90%;
+          animation: fadeIn 0.8s ease-out;
+          transform-style: preserve-3d;
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        .auth-container h2 {
+          font-size: 2.2rem;
+          margin-bottom: 1rem;
+          color: var(--primary);
+          background: linear-gradient(135deg, var(--primary), var(--secondary));
+          -webkit-background-clip: text;
+          background-clip: text;
+          color: transparent;
+        }
+
+        .auth-container p {
+          font-size: 1.1rem;
+          margin-bottom: 2rem;
+          color: var(--text);
+          opacity: 0.8;
+        }
+
+        .auth-container button {
+          display: block;
+          width: 100%;
+          padding: 1rem;
+          margin: 1rem 0;
+          border: none;
+          border-radius: 50px;
+          font-size: 1.1rem;
+          font-weight: 600;
+          cursor: pointer;
+          transition: var(--transition);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .auth-container button:first-of-type {
+          background: linear-gradient(to right, var(--primary), var(--primary-dark));
+          color: var(--white);
+          box-shadow: 0 4px 15px rgba(108, 92, 234, 0.3);
+        }
+
+        .auth-container button:last-of-type {
+          background: transparent;
+          color: var(--primary);
+          border: 2px solid var(--primary);
+        }
+
+        .auth-container button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px rgba(108, 92, 234, 0.4);
+        }
+
+        .auth-container button:active {
+          transform: translateY(-1px);
+        }
+
+        .auth-container button:first-of-type:hover {
+          background: linear-gradient(to right, var(--primary-dark), var(--primary));
+        }
+
+        .auth-container button:last-of-type:hover {
+          background: rgba(108, 92, 231, 0.05);
+        }
+
+        /* Decorative elements */
+        .auth-container::before {
+          content: '';
+          position: absolute;
+          top: -50px;
+          right: -50px;
+          width: 150px;
+          height: 150px;
+          background: radial-gradient(circle, rgba(108, 92, 231, 0.1) 0%, transparent 70%);
+          z-index: -1;
+        }
+
+        .auth-container::after {
+          content: '';
+          position: absolute;
+          bottom: -50px;
+          left: -50px;
+          width: 150px;
+          height: 150px;
+          background: radial-gradient(circle, rgba(165, 105, 189, 0.1) 0%, transparent 70%);
+          z-index: -1;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 480px) {
+          .auth-container {
+            padding: 2rem 1.5rem;
+          }
+          
+          .auth-container h2 {
+            font-size: 1.8rem;
+          }
+          
+          .auth-container p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+          }
+          
+          .auth-container button {
+            padding: 0.9rem;
+            font-size: 1rem;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <h2>Welcome to SoulSpace</h2>
+        <p>Begin your journey to inner peace</p>
+        <button onclick="window.location.href='login_form.html'">Login</button>
+        <button onclick="window.location.href='signup_form.html'">Sign Up</button>
+    </div>
+</body>
+</html>
